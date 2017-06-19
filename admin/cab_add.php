@@ -28,7 +28,7 @@ if (isset($_REQUEST['submit'])) {
             $thumb->save("cab_images/$cab_images_1", "100%");
         }
 
-        $sql_insert = mysqli_query("insert into tbl_cab set
+        $sql_insert = db_query("insert into tbl_cab set
 		cab_number='$cab_number',
 		category='$cat_id',
 		fare_per_hour ='$fare_per_hour',
@@ -40,7 +40,7 @@ if (isset($_REQUEST['submit'])) {
         set_session_msg("CAB has been added successfully"); ?>
 
         <script language="javascript">location.href = 'manage_cab.php'</script>
-        <? phpexit;
+        <?php exit;
     } else {
         set_session_msg("CAB already exist.");
     }
@@ -76,7 +76,7 @@ if (isset($_REQUEST['update'])) {
             db_query("update tbl_cab set cab_image1='" . $cab_images_1 . "' where id='" . $id . "'");
         }
 
-        $sql_update = mysqli_query("update tbl_cab set
+        $sql_update = db_query("update tbl_cab set
 		cab_number='$cab_number',
 		category='$cat_id',
 		fare_per_hour ='$fare_per_hour',
@@ -87,14 +87,14 @@ if (isset($_REQUEST['update'])) {
         set_session_msg("CAB has been updated successfully");
         ?>
         <script language="javascript">location.href = 'manage_cab.php'</script>
-        <? phpexit;
+        <?php exit;
     } else {
         set_session_msg("CAB already exist.");
     }
 }
 if (isset($_REQUEST['set_flag']) && $_REQUEST['set_flag'] == 'update') {
     $category_id = $_REQUEST['category_id'];
-    $sql_fectch_city = mysqli_query("select * from tbl_cab  where id=$id") or die(mysqli_error());
+    $sql_fectch_city = db_query("select * from tbl_cab  where id=$id") or die(mysqli_error());
     $fetch_record = mysqli_fetch_array($sql_fectch_city);
     @extract($fetch_record);
 }
@@ -137,7 +137,7 @@ if (isset($_REQUEST['set_flag']) && $_REQUEST['set_flag'] == 'update') {
                             <td class="tdLabel"><select name="cat_id" id="scab" style="width:200px; "/>
                                 <option value="">Select Catagory</option>
                                 <?php $sel = "SELECT * FROM `tbl_category`";
-                                $exe = mysqli_query($sel) or die("can't access");
+                                $exe = db_query($sel) or die("can't access");
                                 while ($data = mysqli_fetch_array($exe)) {
                                     ?>
                                     <option value="<?= $data['cat_id'] ?>" <?php if ($fetch_record['category'] == $data['cat_id']) {
@@ -188,19 +188,19 @@ if (isset($_REQUEST['set_flag']) && $_REQUEST['set_flag'] == 'update') {
                         <tr>
                             <td class="lightGrayBg" valign="bottom">CAB Image 1</td>
                             <td class="lightGrayBg"><input name="cab_image1" type="file"> Upload CAB Image
-                                <?php if ($cab_image1) { ?>
+                                <? if ($cab_image1) { ?>
                                     <img src="cab_images/<?= $cab_image1 ?>" border="0" width="102" height="102"><br>
-                                <?php } ?></td>
+                                <? } ?></td>
                         </tr>
                         <tr>
                             <td colspan="2">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="2"><?php if ($_REQUEST['set_flag'] == 'update') { ?>
+                            <td align="center" colspan="2"><? if ($_REQUEST['set_flag'] == 'update') { ?>
                                     <input type="submit" name="update" value='Edit'>
-                                <?php } else { ?>
+                                <? } else { ?>
                                     <input type="submit" name="submit" value='Submit'>
-                                <?php } ?></td>
+                                <? } ?></td>
                         </tr>
                     </table>
                 </form>

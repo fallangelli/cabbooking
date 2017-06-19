@@ -72,7 +72,7 @@ if ($_SESSION['sess_admin_id'] == '') {
                 <?php
 
 
-                $sql = mysqli_query("select * from tbl_admin");
+                $sql = db_query("select * from tbl_admin");
 
                 $line_raw = mysqli_fetch_array($sql);
 

@@ -6,7 +6,7 @@ if ($_SESSION['sess_admin_id'] == '') {
     header("location:index.php");
 }
 
-$prod_query = mysqli_query("select  * from tbl_product where product_id='$_REQUEST[product_id]'") or die(mysqli_error());
+$prod_query = db_query("select  * from tbl_product where product_id='$_REQUEST[product_id]'") or die(mysqli_error());
 
 $fetch_record = mysqli_fetch_array($prod_query);
 

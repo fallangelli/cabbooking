@@ -1,5 +1,5 @@
 <?php
-include '../includes/database_connection.php';
+include '../includes/database.php';
 
 
 // PayPal settings

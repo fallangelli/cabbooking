@@ -28,7 +28,7 @@ class DB_Functions
     public function storeUser($email, $gcm_regid, $user_type)
     {
         // insert user into database
-        $result = mysqli_query("INSERT INTO gcm_users(email, gcm_regid, user_type, created_at) VALUES('$email', '$gcm_regid','$user_type', NOW())");
+        $result = db_query("INSERT INTO gcm_users(email, gcm_regid, user_type, created_at) VALUES('$email', '$gcm_regid','$user_type', NOW())");
         // check for successful store
         if ($result) {
             $json['success'] = 1;
@@ -50,7 +50,7 @@ class DB_Functions
             $cab_type = 9;
         }
         // insert user into database
-        $result = mysqli_query("update tbl_user set latitude='$lat' , longitude='$long' ,cab_type = '$cab_type' where email='$email'");
+        $result = db_query("update tbl_user set latitude='$lat' , longitude='$long' ,cab_type = '$cab_type' where email='$email'");
         // check for successful store
         if ($result) {
             //$json['success'] = 1;
@@ -67,7 +67,7 @@ class DB_Functions
 
 
         // update user into database
-        $result = mysqli_query("update gcm_users set gcm_regid='$gcm_regid', user_type ='$user_type' where email='$email'");
+        $result = db_query("update gcm_users set gcm_regid='$gcm_regid', user_type ='$user_type' where email='$email'");
         return $result;
         // check for successful store
     }
@@ -77,7 +77,7 @@ class DB_Functions
 
 
         // update user into database
-        $result = mysqli_query("update gcm_users set driver_status='$status' where email='$email'");
+        $result = db_query("update gcm_users set driver_status='$status' where email='$email'");
         return $result;
         // check for successful store
     }
@@ -87,7 +87,7 @@ class DB_Functions
     {
 
         //delete same user enteries from nearest_driver
-        //$del = mysqli_query("delete from nearest_driver where user_email='$user_mail'");
+        //$del = db_query("delete from nearest_driver where user_email='$user_mail'");
         // insert user into database
         if ($cab_type == 1) {
             $cab_type = 7;
@@ -97,7 +97,7 @@ class DB_Functions
             $cab_type = 9;
         }
 
-        $result = mysqli_query("insert into nearest_driver set user_email = '$user_mail', driver_email='$email' , latitude='$lat' , longitude='$long' ,cab_type ='$cab_type' ,driver_status='$driver_status' ");
+        $result = db_query("insert into nearest_driver set user_email = '$user_mail', driver_email='$email' , latitude='$lat' , longitude='$long' ,cab_type ='$cab_type' ,driver_status='$driver_status' ");
         // check for successful store
         if ($result) {
             //$json['success'] = 1;
@@ -113,7 +113,7 @@ class DB_Functions
      */
     public function getUserByEmail($email)
     {
-        $result = mysqli_query("SELECT * FROM gcm_users WHERE email = '$email' LIMIT 1");
+        $result = db_query("SELECT * FROM gcm_users WHERE email = '$email' LIMIT 1");
         return $result;
     }
 
@@ -122,7 +122,7 @@ class DB_Functions
      */
     public function getAllUsers()
     {
-        $result = mysqli_query("select * FROM gcm_users");
+        $result = db_query("select * FROM gcm_users");
         return $result;
     }
 
@@ -131,7 +131,7 @@ class DB_Functions
      */
     public function isUserExisted($email)
     {
-        $result = mysqli_query("SELECT email from gcm_users WHERE email = '$email'");
+        $result = db_query("SELECT email from gcm_users WHERE email = '$email'");
         $no_of_rows = mysqli_num_rows($result);
         if ($no_of_rows > 0) {
             // user existed

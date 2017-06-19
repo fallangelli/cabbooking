@@ -47,7 +47,7 @@ class CurrencyConverter
 
         $sql = "SELECT * FROM " . $this->mysql_table;
 
-        $rs = mysqli_query($sql, $conn);
+        $rs = db_query($sql, $conn);
 
         while ($row = mysqli_fetch_array($rs)) {
 
@@ -66,7 +66,7 @@ class CurrencyConverter
 
         $sql = "SHOW TABLE STATUS FROM " . $this->mysql_db . " LIKE '" . $this->mysql_table . "'";
 
-        $rs = mysqli_query($sql, $conn);
+        $rs = db_query($sql, $conn);
 
         if (mysqli_num_rows($rs) == 0) {
 
@@ -91,11 +91,11 @@ class CurrencyConverter
 
         $sql = "CREATE TABLE " . $this->mysql_table . " ( currency char(3) NOT NULL default '', rate float NOT NULL default '0', PRIMARY KEY(currency) ) ENGINE=MyISAM";
 
-        $rs = mysqli_query($sql, $conn) or die(mysqli_error());
+        $rs = db_query($sql, $conn) or die(mysqli_error());
 
         $sql = "INSERT INTO " . $this->mysql_table . " VALUES('EUR',1)";
 
-        $rs = mysqli_query($sql, $conn) or die(mysqli_error());
+        $rs = db_query($sql, $conn) or die(mysqli_error());
 
         $this->downloadExchangeRates();
     }
@@ -138,7 +138,7 @@ class CurrencyConverter
                 if ((is_numeric($rate)) && ($rate != 0)) {
 
                     $sql = "SELECT * FROM " . $this->mysql_table . " WHERE currency='" . $currency . "'";
-                    $rs = mysqli_query($sql, $conn) or die(mysqli_error());
+                    $rs = db_query($sql, $conn) or die(mysqli_error());
                     if (mysqli_num_rows($rs) > 0) {
 
                         $sql = "UPDATE " . $this->mysql_table . " SET rate=" . $rate . " WHERE currency='" . $currency . "'";
@@ -147,7 +147,7 @@ class CurrencyConverter
                         $sql = "INSERT INTO " . $this->mysql_table . " VALUES('" . $currency . "'," . $rate . ")";
                     }
 
-                    $rs = mysqli_query($sql, $conn) or die(mysqli_error());
+                    $rs = db_query($sql, $conn) or die(mysqli_error());
                 }
 
             }

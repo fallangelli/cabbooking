@@ -14,7 +14,7 @@ if (isset($_REQUEST['submit'])) {
             copy($_FILES[cat_image]['tmp_name'], "cab_images/" . $cat_image_1) or die("Image is not uploaded");
         }
 
-        $sql_insert = mysqli_query("insert into tbl_category set cat_name='" . $category_name . "', cat_parent_id='" . $parent_id . "', cat_desc='" . $cat_desc . "', cat_image='" . $cat_image_1 . "', cat_status='Active'") or die(mysqli_error());
+        $sql_insert = db_query("insert into tbl_category set cat_name='" . $category_name . "', cat_parent_id='" . $parent_id . "', cat_desc='" . $cat_desc . "', cat_image='" . $cat_image_1 . "', cat_status='Active'") or die(mysqli_error());
         set_session_msg("Category has been submitted successfully"); ?>
 
         <script language="javascript">location.href = 'manage_category.php'</script>
@@ -47,7 +47,7 @@ if (isset($_REQUEST['update'])) {
 
         $sql_update = "update  tbl_category set cat_name='" . $category_name . "', cat_parent_id='" . $parent_id . "', cat_desc='" . $cat_desc . "' where cat_id='" . $category_id . "'";
         #	die($sql_update);
-        $sql_update = mysqli_query($sql_update) or die(mysqli_error());
+        $sql_update = db_query($sql_update) or die(mysqli_error());
         set_session_msg("Category has been updated successfully"); ?>
 
         <script language="javascript">location.href = 'manage_category.php'</script>
@@ -59,7 +59,7 @@ if (isset($_REQUEST['update'])) {
 
 if (isset($_REQUEST['set_flag']) && $_REQUEST['set_flag'] == 'update') {
     $category_id = $_REQUEST['category_id'];
-    $sql_fectch_city = mysqli_query("select * from tbl_category  where cat_id=$category_id") or die(mysqli_error());
+    $sql_fectch_city = db_query("select * from tbl_category  where cat_id=$category_id") or die(mysqli_error());
     $fetch_record = mysqli_fetch_array($sql_fectch_city);
     @extract($fetch_record);
 }
@@ -99,7 +99,7 @@ if (isset($_REQUEST['set_flag']) && $_REQUEST['set_flag'] == 'update') {
                         <tr>
                             <td class="tdLabel"><strong>Select Parent Category </strong></td>
                             <td class="tdLabel"><?php $sql_cat = "select * from tbl_category where cat_parent_id='0' and cat_status = 'active'";
-                                $rs_cat = mysqli_query($sql_cat); ?>
+                                $rs_cat = db_query($sql_cat); ?>
                                 <select name="cat_parent_id">
                                     <option value="">--Select Parent Category--</option>
                                     <?php while ($rc_cat = mysqli_fetch_array($rs_cat)) { ?>

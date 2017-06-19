@@ -44,7 +44,7 @@ $result = db_query($sql);
 $reccnt = db_scalar($sql_count);
 ?>
     <link href="styles.css" rel="stylesheet" type="text/css">
-<?php include("top.inc.php"); ?>
+    <?php include("top.inc.php"); ?>
     <script language="javascript">
         function checkall(objForm) {
             len = objForm.elements.length;

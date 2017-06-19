@@ -15,10 +15,10 @@ if (isset($_REQUEST["d_email"]) && isset($_REQUEST["d_cabtype"]) && isset($_REQU
     $distance = $_REQUEST["distance"];
     $cab_no = $_REQUEST["cab_number"];
 
-    $sel_driver = mysqli_fetch_object(mysqli_query("select * from tbl_user where email='$driver_email'"));
+    $sel_driver = mysqli_fetch_object(db_query("select * from tbl_user where email='$driver_email'"));
     $driver_id = $sel_driver->id;
 
-    $sel_passenger = mysqli_fetch_object(mysqli_query("select * from tbl_user where email='$user_email'"));
+    $sel_passenger = mysqli_fetch_object(db_query("select * from tbl_user where email='$user_email'"));
     $user_id = $sel_passenger->id;
     $user_name = $sel_passenger->fullname;
     $user_no = $sel_passenger->mobile;
@@ -34,7 +34,7 @@ if (isset($_REQUEST["d_email"]) && isset($_REQUEST["d_cabtype"]) && isset($_REQU
     $insert_query = "insert into tbl_ride (`driver`,`cab`,`passenger`,`pickup_date`,`pickuptime`,`pickup_address`,`dropoff_address`,`distance`,`cab_number`,`ride_status`)"
         . " values ('$driver_id','$dri_cabtype','$user_id','$pick_date','$pick_time','$pick_add','$dest_add','$distance','$cab_no','pending')";
 
-    $insert_exe = mysqli_query($insert_query);
+    $insert_exe = db_query($insert_query);
     $insert_id = mysqli_insert_id();
     if ($insert_exe) {
         $response['unique_id'] = "$insert_id";
@@ -42,7 +42,7 @@ if (isset($_REQUEST["d_email"]) && isset($_REQUEST["d_cabtype"]) && isset($_REQU
     }
     $driver_regID = array();
 
-    $sel_query = mysqli_query("SELECT * FROM gcm_users where email='$driver_email' ");
+    $sel_query = db_query("SELECT * FROM gcm_users where email='$driver_email' ");
     $row = mysqli_fetch_array($sel_query);
 
     $driver_regID[] = $row['gcm_regid'];

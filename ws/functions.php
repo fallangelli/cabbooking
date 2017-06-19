@@ -6,7 +6,7 @@ function check_txnid($tnxid)
     return true;
     $valid_txnid = true;
     //get result set
-    $sql = mysqli_query("SELECT * FROM `payments` WHERE txnid = '$tnxid'", $link);
+    $sql = db_query("SELECT * FROM `payments` WHERE txnid = '$tnxid'", $link);
     if ($row = mysqli_fetch_array($sql)) {
         $valid_txnid = false;
     }
@@ -19,7 +19,7 @@ function check_price($price, $id)
     //you could use the below to check whether the correct price has been paid for the product
 
     /*
-    $sql = mysqli_query("SELECT amount FROM `products` WHERE id = '$id'");
+    $sql = db_query("SELECT amount FROM `products` WHERE id = '$id'");
     if (mysql_numrows($sql) != 0) {
         while ($row = mysqli_fetch_array($sql)) {
             $num = (float)$row['amount'];
@@ -38,7 +38,7 @@ function updatePayments($data)
 
     //global $link;
     if (is_array($data)) {
-        $sql = mysqli_query("Update `tbl_payments` set transaction_id='" . $data['txn_id'] . "', amount='" . $data['payment_amount'] . "', status='" . $data['payment_status'] . "' where status='pending' and passenger_id='" . $data['user_id'] . "' ");
+        $sql = db_query("Update `tbl_payments` set transaction_id='" . $data['txn_id'] . "', amount='" . $data['payment_amount'] . "', status='" . $data['payment_status'] . "' where status='pending' and passenger_id='" . $data['user_id'] . "' ");
         return mysqli_insert_id($sql);
     }
 }

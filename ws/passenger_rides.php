@@ -2,7 +2,7 @@
 include('../includes/include_files.php');
 
 $user_email = mysqli_real_escape_string(addslashes($_REQUEST['email']));
-$user_id = mysqli_fetch_object(mysqli_query("select * from tbl_user where email='$user_email'"));
+$user_id = mysqli_fetch_object(db_query("select * from tbl_user where email='$user_email'"));
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +29,7 @@ $user_id = mysqli_fetch_object(mysqli_query("select * from tbl_user where email=
                 <ul class="fa-ul">
                     <?php
                     $sel = "select * from tbl_ride where passenger='$user_id->id' and ride_status='confirm' order by pickup_date and pickuptime limit 1";
-                    $sel_exe = mysqli_query($sel);
+                    $sel_exe = db_query($sel);
                     $data_count = mysqli_num_rows($sel_exe);
                     $data = mysqli_fetch_array($sel_exe);
 
@@ -49,7 +49,7 @@ $user_id = mysqli_fetch_object(mysqli_query("select * from tbl_user where email=
                 <?php
                 //echo '<br/>';
                 $sel_pay_id = "select * from tbl_payments where passenger_id='$user_id->id' and driver_id='" . $data['driver'] . "' and pickup_date='" . $data['pickup_date'] . "' and status='pending' ";
-                $sel_pay_exe = mysqli_query($sel_pay_id);
+                $sel_pay_exe = db_query($sel_pay_id);
                 $count = mysqli_num_rows($sel_pay_exe);
                 $payment_id = mysqli_fetch_array($sel_pay_exe);
                 if ($count > 0) {
@@ -64,7 +64,7 @@ $user_id = mysqli_fetch_object(mysqli_query("select * from tbl_user where email=
                 <ul class="fa-ul">
                     <?php
                     $sel = "select * from tbl_ride where passenger='$user_id->id' and ride_status='confirm' order by pickup_date and pickuptime limit 1,10";
-                    $sel_exe = mysqli_query($sel);
+                    $sel_exe = db_query($sel);
                     $data_count = mysqli_num_rows($sel_exe);
                     if ($data_count > 0) {
                         while ($data = mysqli_fetch_array($sel_exe)) {
@@ -88,7 +88,7 @@ $user_id = mysqli_fetch_object(mysqli_query("select * from tbl_user where email=
                 <ul class="fa-ul">
                     <?php
                     $sel = "select * from tbl_ride where passenger='$user_id->id' and  ride_status='completed' ";
-                    $sel_exe = mysqli_query($sel);
+                    $sel_exe = db_query($sel);
                     $data_count = mysqli_num_rows($sel_exe);
                     if ($data_count > 0) {
                         while ($data = mysqli_fetch_array($sel_exe)) {

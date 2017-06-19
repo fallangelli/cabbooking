@@ -20,7 +20,7 @@ include('../includes/include_files.php');
 
         <div id="details">
             <?php
-            $select_con = mysqli_query("select * from tbl_content where page_id = '4'");
+            $select_con = query_exec("select * from tbl_content where page_id = '4'");
             $fetch_data = mysqli_fetch_object($select_con);
             ?>
 

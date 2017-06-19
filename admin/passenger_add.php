@@ -37,7 +37,7 @@ if (isset($_REQUEST['submit'])) {
             $thumb->save("../profile_pic/$driver_images_1", "100%");
         }
 
-        $sql_insert = mysqli_query("insert into tbl_user set
+        $sql_insert = db_query("insert into tbl_user set
 		fullname='$fullname',
 		email='$email',
 		password ='$password',
@@ -102,7 +102,7 @@ if (isset($_REQUEST['update'])) {
             db_query("update tbl_user set image='" . $driver_images_1 . "' where id='" . $id . "'");
         }
 
-        $sql_update = mysqli_query("update tbl_user set
+        $sql_update = db_query("update tbl_user set
 		fullname='$fullname',
 		email='$email',
 		password ='$password',
@@ -124,7 +124,7 @@ if (isset($_REQUEST['update'])) {
 }
 if (isset($_REQUEST['set_flag']) && $_REQUEST['set_flag'] == 'update') {
     $category_id = $_REQUEST['category_id'];
-    $sql_fectch_city = mysqli_query("select * from tbl_user  where id=$id and usertype='passenger'") or die(mysqli_error());
+    $sql_fectch_city = db_query("select * from tbl_user  where id=$id and usertype='passenger'") or die(mysqli_error());
     $fetch_record = mysqli_fetch_array($sql_fectch_city);
     @extract($fetch_record);
 }

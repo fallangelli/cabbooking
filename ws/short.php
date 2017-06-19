@@ -27,7 +27,7 @@ function distance($a, $b)
     $miles = $dist * 60 * 1.1515;
     return $miles;
 }*/
-include '../includes/database_connection.php';
+include '../includes/database.php';
 
 $slatitude = 28.6772717;
 $slongitude = 77.3179828;
@@ -36,7 +36,7 @@ $miles = 200;
 echo $query = "SELECT *, ( 3959 * acos( cos( radians($slatitude) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($slongitude) ) + sin( radians($slatitude) ) * sin( radians( latitude ) ) ) ) "
     . "AS distance FROM gcm_users HAVING distance < 250 ORDER BY distance LIMIT 1";
 
-$query = mysqli_query($query);
+$query = db_query($query);
 //$numrows = mysqli_num_rows($query);
 
 

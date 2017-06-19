@@ -4,7 +4,7 @@ function CategoryName($cat_id)
     if ($cat_id == "0") {
         return "Parent Category";
     } else {
-        $sqlCategory = mysqli_query("select * from tbl_category where cat_id='$cat_id'");
+        $sqlCategory = db_query("select * from tbl_category where cat_id='$cat_id'");
         $resCategory = mysqli_fetch_array($sqlCategory);
         return $resCategory['cat_name'];
     }
@@ -12,49 +12,49 @@ function CategoryName($cat_id)
 
 function getContentTitle($cid)
 {
-    $sqlCategory = mysqli_query("select page_title from tbl_content where page_id='$cid'");
+    $sqlCategory = db_query("select page_title from tbl_content where page_id='$cid'");
     $resCategory = mysqli_fetch_array($sqlCategory);
     echo $resCategory['page_title'];
 }
 
 function getContent($cid)
 {
-    $sqlCategory = mysqli_query("select page_text from tbl_content where page_id='$cid'");
+    $sqlCategory = db_query("select page_text from tbl_content where page_id='$cid'");
     $resCategory = mysqli_fetch_array($sqlCategory);
     echo $resCategory['page_text'];
 }
 
 function ProductName($product_id)
 {
-    $sqlProduct = mysqli_query("select * from tbl_product where product_id='$product_id'");
+    $sqlProduct = db_query("select * from tbl_product where product_id='$product_id'");
     $resProduct = mysqli_fetch_array($sqlProduct);
     echo $resProduct['product_name'];
 }
 
 function ProductCount($product_cat_id)
 {
-    $sqlProductCount = mysqli_query("select count(*) as totalitem from tbl_product where product_cat_id='$product_cat_id'");
+    $sqlProductCount = db_query("select count(*) as totalitem from tbl_product where product_cat_id='$product_cat_id'");
     $resProductCount = mysqli_fetch_array($sqlProductCount);
     echo $resProductCount['totalitem'];
 }
 
 function newProductCount($product_cat_id)
 {
-    $sqlProductCount = mysqli_query("select count(*) as totalitem from tbl_product where product_cat_id='$product_cat_id' and is_new='Y' ");
+    $sqlProductCount = db_query("select count(*) as totalitem from tbl_product where product_cat_id='$product_cat_id' and is_new='Y' ");
     $resProductCount = mysqli_fetch_array($sqlProductCount);
     echo $resProductCount['totalitem'];
 }
 
 function saleProductCount($product_cat_id)
 {
-    $sqlProductCount = mysqli_query("select count(*) as totalitem from tbl_product where product_cat_id='$product_cat_id' and is_sale='Y' ");
+    $sqlProductCount = db_query("select count(*) as totalitem from tbl_product where product_cat_id='$product_cat_id' and is_sale='Y' ");
     $resProductCount = mysqli_fetch_array($sqlProductCount);
     echo $resProductCount['totalitem'];
 }
 
 function StaticPageContents($page_id)
 {
-    $sqlContent = mysqli_query("select * from tbl_content where page_id='$page_id' ");
+    $sqlContent = db_query("select * from tbl_content where page_id='$page_id' ");
     $resContent = mysqli_fetch_array($sqlContent);
     echo $resContent['page_text'];
 }
@@ -105,14 +105,14 @@ function saveResizedImage2($file_name, $width, $height, $source_folder, $destina
 function CountCartItems()
 {
     $sqlcheck = "select * from tbl_addbasket where session_id='" . session_id() . "'";
-    $rescheck = mysqli_query($sqlcheck);
+    $rescheck = db_query($sqlcheck);
     return mysqli_num_rows($rescheck);
 }
 
 function getProductAttribute($field, $id)
 {
     $sql = "select $field from tbl_product where product_id='$id'";
-    $rs = mysqli_query($sql);
+    $rs = db_query($sql);
     $rc = mysqli_fetch_array($rs);
     return $rc[0];
 }
@@ -120,7 +120,7 @@ function getProductAttribute($field, $id)
 function getUserAttribute($field, $id)
 {
     $sql = "select $field from registration where id='$id'";
-    $rs = mysqli_query($sql);
+    $rs = db_query($sql);
     $rc = mysqli_fetch_array($rs);
     return $rc[0];
 }
@@ -129,7 +129,7 @@ function getDHLShippingCharge($userid, $weight)
 {
     $country = getUserAttribute('country', $userid);
     $sql = "select shipping_charge from tbl_zone_rate where weight>=" . $weight . " and zone=(select zone from tbl_country_master where contCode='" . $country . "')";
-    $rs = mysqli_query($sql);
+    $rs = db_query($sql);
     $rc = mysqli_fetch_array($rs);
     return $rc['shipping_charge'];
 }
@@ -138,7 +138,7 @@ function getShippingTime($userid)
 {
     $country = getUserAttribute('country', $userid);
     $sql = "select shipping_time from tbl_country_master where contCode='" . $country . "'";
-    $rs = mysqli_query($sql);
+    $rs = db_query($sql);
     $rc = mysqli_fetch_array($rs);
     return $rc['shipping_time'];
 }
@@ -146,28 +146,28 @@ function getShippingTime($userid)
 function getCountryNameByCode($code)
 {
     $sql = "select * from tbl_country_master where contCode='" . $code . "'";
-    $rs = mysqli_fetch_array(mysqli_query($sql));
+    $rs = mysqli_fetch_array(db_query($sql));
     return $rs['contName'];
 }
 
 function getBusinessType($type)
 {
     $sql = "select * from tbl_business_type where id='" . $type . "'";
-    $rs = mysqli_fetch_array(mysqli_query($sql));
+    $rs = mysqli_fetch_array(db_query($sql));
     return $rs['type'];
 }
 
 function getMembership($membership)
 {
     $sql = "select * from tbl_membership where id='" . $membership . "'";
-    $rs = mysqli_fetch_array(mysqli_query($sql));
+    $rs = mysqli_fetch_array(db_query($sql));
     return $rs['title'];
 }
 
 function getUserType($uid)
 {
     $sql = "select user_type from tbl_user where id='" . $uid . "'";
-    $rs = mysqli_query($sql);
+    $rs = db_query($sql);
     $rc = mysqli_fetch_array($rs);
     return $rc['user_type'];
 }
@@ -175,7 +175,7 @@ function getUserType($uid)
 function getUserMembership($uid)
 {
     $sql = "select membership from tbl_user where id='" . $uid . "'";
-    $rs = mysqli_query($sql);
+    $rs = db_query($sql);
     $rc = mysqli_fetch_array($rs);
     return $rc['membership'];
 }

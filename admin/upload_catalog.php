@@ -14,14 +14,14 @@ if (isset($_REQUEST['submit'])) {
             copy($_FILES[catalog]['tmp_name'], "product_images/" . $catalog_1) or die("Image is not uploaded");
         }
 
-        $sql_insert = mysqli_query("insert into tbl_catelogue set catalogue='$catalog_1'") or die(mysqli_error());
+        $sql_insert = db_query("insert into tbl_catelogue set catalogue='$catalog_1'") or die(mysqli_error());
         set_session_msg("Catalogue has been added successfully"); ?>
 
         <script language="javascript">location.href = 'upload_catalog.php'</script>
         <?php exit;
     } else {
         $sql = "select * from tbl_catelogue";
-        $rs = mysqli_query($sql);
+        $rs = db_query($sql);
         $rc = mysqli_fetch_array($rs);
         if (file_exists("product_images/" . $rc['catalogue'])) {
             unlink("product_images/" . $rc['catalogue']);
@@ -32,7 +32,7 @@ if (isset($_REQUEST['submit'])) {
             copy($_FILES[catalog]['tmp_name'], "product_images/" . $catalog_1) or die("Image is not uploaded");
         }
 
-        $sql_insert = mysqli_query("update tbl_catelogue set catalogue='$catalog_1'") or die(mysqli_error());
+        $sql_insert = db_query("update tbl_catelogue set catalogue='$catalog_1'") or die(mysqli_error());
         set_session_msg("Catalogue has been updated successfully"); ?>
 
         <script language="javascript">location.href = 'upload_catalog.php'</script>
@@ -41,7 +41,7 @@ if (isset($_REQUEST['submit'])) {
 }
 /******************************************************************************************************/
 
-$sql_fectch_city = mysqli_query("select * from tbl_catelogue") or die(mysqli_error());
+$sql_fectch_city = db_query("select * from tbl_catelogue") or die(mysqli_error());
 $fetch_record = mysqli_fetch_array($sql_fectch_city);
 @extract($fetch_record);
 ?>

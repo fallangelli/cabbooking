@@ -62,7 +62,7 @@ if (isset($_REQUEST['arr_ids'])) {
 
 if ($_GET['id'] != '' && $_GET['status'] != '') {
     echo $sql = "update tbl_order set order_status='" . $_GET[status] . "' where id ='" . $_GET['id'] . "'";
-    $res = mysqli_query($sql) or die(mysqli_error());
+    $res = db_query($sql) or die(mysqli_error());
 
     set_session_msg("Selected orders have been Update successfully");
     header("location:order_listing.php#des");

@@ -1,6 +1,6 @@
 <?php
 
-include '../includes/database_connection.php';
+include '../includes/database.php';
 include '../includes/image_resize_function.php';
 $response = array();
 //include ('includes/include_files.php');
@@ -23,7 +23,7 @@ fclose($file);
 
 $final_image = createScaledImage($new_image_name, $destinationPath, '150');
 
-$update_img = mysqli_query("update tbl_user set image='$img_name' where email='$user_email'");
+$update_img = db_query("update tbl_user set image='$img_name' where email='$user_email'");
 
 if ($final_image) {
     $response['success'] = 1;

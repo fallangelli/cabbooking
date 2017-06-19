@@ -1,6 +1,6 @@
 <?php
 require_once('includes/main.inc.php');
-$sql_fectch_city = mysqli_query("select  * from registration  where id='" . $_REQUEST['id'] . "'") or die(mysqli_error());
+$sql_fectch_city = db_query("select  * from registration  where id='" . $_REQUEST['id'] . "'") or die(mysqli_error());
 $fetch_record = mysqli_fetch_array($sql_fectch_city);
 @extract($fetch_record);
 ?>

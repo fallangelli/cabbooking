@@ -1,18 +1,16 @@
 <?php
 include('../includes/include_files.php');
 $msg = "";
-
-
 /* ----ON SUBMIT------ */
 if (isset($_POST['submit'])) {
 
     $date = date('Y-m-d');
 
-    $full_name = mysqli_real_escape_string(addslashes($_REQUEST['fname']));
-    $email_address = mysqli_real_escape_string(addslashes($_REQUEST['email']));
-    $pass = mysqli_real_escape_string(addslashes($_REQUEST['password']));
-    $contact_no = mysqli_real_escape_string(addslashes($_REQUEST['mobile']));
-    $usertype = mysqli_real_escape_string(addslashes($_REQUEST['user-type']));
+    $full_name = real_escape_string(addslashes($_REQUEST['fname']));
+    $email_address = real_escape_string(addslashes($_REQUEST['email']));
+    $pass = real_escape_string(addslashes($_REQUEST['password']));
+    $contact_no = real_escape_string(addslashes($_REQUEST['mobile']));
+    $usertype = real_escape_string(addslashes($_REQUEST['user-type']));
     if ($usertype = 'driver') {
         $status = 'Inactive';
     } else {
@@ -21,25 +19,23 @@ if (isset($_POST['submit'])) {
 
     if ($full_name != "" && $email_address != "" && $pass != "" && $contact_no != "" && $usertype != "") {
 
-        $checkinfo = mysqli_query("select * from tbl_user where email='" . $_POST['email'] . "' ");
+        $checkinfo = db_query("select * from tbl_user where email='" . $_POST['email'] . "' ");
         $count_email = mysqli_num_rows($checkinfo);
         if ($count_email == 0) {
 
-            $reg_ins = mysqli_query("insert into tbl_user(`fullname`, `email`, `password`, `mobile`, `usertype`,`add_date`, `status` ) values ('$full_name','$email_address','$pass','$contact_no','$usertype','$date', '$status')");
+            $reg_ins = db_query("insert into tbl_user(`fullname`, `email`, `password`, `mobile`, `usertype`,`add_date`, `status` ) values ('$full_name','$email_address','$pass','$contact_no','$usertype','$date', '$status')");
 
             if ($reg_ins) {
 
-                $uinfo = mysqli_query("select * from tbl_user where email='" . $_POST['email'] . "' and password='" . $_POST['password'] . "' ");
+                $uinfo = db_query("select * from tbl_user where email='" . $_POST['email'] . "' and password='" . $_POST['password'] . "' ");
                 $res = mysqli_fetch_object($uinfo);
 
                 echo "<script>window.android.clickOnRegister();</script>";
             }
         } else {
-
             $msg = " Email ID Already Exist.";
         }
     } else {
-
         $msg = "Please fill all required fields *";
     }
 }
@@ -105,7 +101,6 @@ if (isset($_POST['submit'])) {
 
                 </form>
                 <div class="login-links">
-
                     <a onClick="window.android.clickOnAlreadyRegister();">Already Registered ? Login Here</a><br>
                 </div>
             </div>

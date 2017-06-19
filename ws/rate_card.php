@@ -43,7 +43,7 @@ include('../includes/include_files.php');
                     <select class="text" style="width:100%;padding:10px !important" name="cab-type"
                             onchange="rate_card_details(this.value);">
                         <?php
-                        $sel_cab = mysqli_query("select * from tbl_category where cat_status = 'Active' order by cat_id");
+                        $sel_cab = db_query("select * from tbl_category where cat_status = 'Active' order by cat_id");
                         while ($row = mysqli_fetch_array($sel_cab)) {
                             ?>
                             <option value="<?php echo $row['cat_id'] ?>"><?php echo $row['cat_name']; ?></option>
@@ -60,7 +60,7 @@ include('../includes/include_files.php');
         <div id="details">
             <h2>Standard Rates</h2>
             <?php
-            $sel_cab_detail = mysqli_query("select * from tbl_cab where category = '7'");
+            $sel_cab_detail = db_query("select * from tbl_cab where category = '7'");
             $detail = mysqli_fetch_object($sel_cab_detail);
             ?>
 

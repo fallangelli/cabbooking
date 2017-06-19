@@ -13,7 +13,7 @@ if (isset($_REQUEST['submit'])) {
         $flat_discount = $_REQUEST['flat_discount'];
         $percentile = $_REQUEST['percentile'];
 
-        $sql_insert = mysqli_query("insert into tbl_coupon set
+        $sql_insert = db_query("insert into tbl_coupon set
 		coupon='$coupon',
 		flat_discount='$flat_discount',
 		percentile ='$percentile',
@@ -38,7 +38,7 @@ if (isset($_REQUEST['update'])) {
         $flat_discount = $_REQUEST['flat_discount'];
         $percentile = $_REQUEST['percentile'];
 
-        $sql_update = mysqli_query("update tbl_coupon set
+        $sql_update = db_query("update tbl_coupon set
 		coupon='$coupon',
 		flat_discount='$flat_discount',
 		percentile ='$percentile',
@@ -53,7 +53,7 @@ if (isset($_REQUEST['update'])) {
     }
 }
 if (isset($_REQUEST['set_flag']) && $_REQUEST['set_flag'] == 'update') {
-    $sql_fectch_city = mysqli_query("select * from tbl_coupon  where id=$id") or die(mysqli_error());
+    $sql_fectch_city = db_query("select * from tbl_coupon  where id=$id") or die(mysqli_error());
     $fetch_record = mysqli_fetch_array($sql_fectch_city);
     @extract($fetch_record);
 }

@@ -19,7 +19,7 @@ if (isset($_REQUEST["email"]) && isset($_REQUEST["regId"]) && isset($_REQUEST["u
 
     $db = new DB_Functions();
 
-    $sel = mysqli_query("SELECT * from gcm_users WHERE email = '$email'");
+    $sel = db_query("SELECT * from gcm_users WHERE email = '$email'");
     $no_of_rows = mysqli_num_rows($sel);
     if ($no_of_rows > 0) {
 

@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
 
     if ($email_address != "") {
 
-        $checkinfo = mysqli_query("select * from tbl_user where email='" . $_POST['email'] . "' ");
+        $checkinfo = db_query("select * from tbl_user where email='" . $_POST['email'] . "' ");
         $count_email = mysqli_num_rows($checkinfo);
         if ($count_email != 0) {
 

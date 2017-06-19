@@ -1385,7 +1385,7 @@ function frontpage_nav($catid)
     $flag = 0;
     $catparent = $catid;
     while ($flag != 1) {
-        $res1 = mysqli_query("select * from tbl_category where cat_id='$catparent'");
+        $res1 = db_query("select * from tbl_category where cat_id='$catparent'");
         $record = mysqli_fetch_array($res1);
         if ($record[cat_parent_id] != 0) {
             $catparent = $record[cat_parent_id];
@@ -1404,7 +1404,7 @@ function frontpage_nav($catid)
     #echo "<a href='".$baseurl."/index.htm' class='link3'>Home</a> ";
     for ($i = 0; $i < count($result) - 1; $i++) {
         $res = mysqli_fetch_array(db_query("select * from tbl_category where cat_id='$result[$i]'"));
-        $re = mysqli_query("select * from tbl_product where (product_cat_id='$res[cat_id]' or product_subcat_id='$res[cat_id]')");
+        $re = db_query("select * from tbl_product where (product_cat_id='$res[cat_id]' or product_subcat_id='$res[cat_id]')");
 
         #$cat_name=stripslashes($res[catName]);
         $cat_name = stripslashes($res[cat_name]);

@@ -2,7 +2,7 @@
 include('../includes/include_files.php');
 
 $driver_email = $_REQUEST['email'];
-$driver_id = mysqli_fetch_object(mysqli_query("select * from tbl_user where email='$driver_email'"));
+$driver_id = mysqli_fetch_object(db_query("select * from tbl_user where email='$driver_email'"));
 
 
 /* --Changes by KKB on 17 April 2015 -- */
@@ -15,7 +15,7 @@ if (isset($_REQUEST['update_payment'])) {
     $driver = $_REQUEST['driver'];
 
 //echo $text123="update tbl_payments set amount='$amount' where driver_id='".$driver."' and passenger_id='".$passenger."' and pickup_date='".$pickup_date."' and pickup_time='".$pickup_time."' and status='pending'";
-    $update = mysqli_query("update tbl_payments set amount='$amount' where driver_id='" . $driver . "' and passenger_id='" . $passenger . "' and pickup_date='" . $pickup_date . "' and pickup_time='" . $pickup_time . "' and status='pending'");
+    $update = db_query("update tbl_payments set amount='$amount' where driver_id='" . $driver . "' and passenger_id='" . $passenger . "' and pickup_date='" . $pickup_date . "' and pickup_time='" . $pickup_time . "' and status='pending'");
     if ($update) {
 
         $msg = "Fare Updated Successfully.";
@@ -49,7 +49,7 @@ if (isset($_REQUEST['update_payment'])) {
                 <ul class="fa-ul">
                     <?php
                     $sel = "select * from tbl_ride where driver='$driver_id->id' and ride_status='confirm' order by pickup_date and pickuptime limit 1";
-                    $sel_exe = mysqli_query($sel);
+                    $sel_exe = db_query($sel);
                     $count = mysqli_num_rows($sel_exe);
                     if ($count > 0) {
                         while ($data = mysqli_fetch_array($sel_exe)) {
@@ -68,7 +68,7 @@ if (isset($_REQUEST['update_payment'])) {
                     <?php } ?>
                 </ul>
                 <?php if ($count > 0) {
-                    $sel_exe1 = mysqli_query($sel);
+                    $sel_exe1 = db_query($sel);
                     $data = mysqli_fetch_array($sel_exe1);
                     ?>
                     <div class="form">
@@ -96,7 +96,7 @@ if (isset($_REQUEST['update_payment'])) {
                 <ul class="fa-ul">
                     <?php
                     $sel = "select * from tbl_ride where driver='$driver_id->id' and ride_status='confirm' order by pickup_date and pickuptime limit 1,10";
-                    $sel_exe = mysqli_query($sel);
+                    $sel_exe = db_query($sel);
                     $count = mysqli_num_rows($sel_exe);
                     if ($count > 0) {
                         while ($data = mysqli_fetch_array($sel_exe)) {
@@ -120,7 +120,7 @@ if (isset($_REQUEST['update_payment'])) {
                 <ul class="fa-ul">
                     <?php
                     $sel = "select * from tbl_ride where driver='$driver_id->id' and  ride_status='completed' ";
-                    $sel_exe = mysqli_query($sel);
+                    $sel_exe = db_query($sel);
                     $count = mysqli_num_rows($sel_exe);
                     if ($count > 0) {
                         while ($data = mysqli_fetch_array($sel_exe)) {

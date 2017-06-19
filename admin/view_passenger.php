@@ -1,6 +1,6 @@
 <?php
 require_once('includes/main.inc.php');
-$sql_fectch_city = mysqli_query("select *, date_format(add_date,'%b %d, %Y') as rdate from tbl_user where id='" . $_REQUEST['pid'] . "' and usertype='passenger'") or die(mysqli_error());
+$sql_fectch_city = db_query("select *, date_format(add_date,'%b %d, %Y') as rdate from tbl_user where id='" . $_REQUEST['pid'] . "' and usertype='passenger'") or die(mysqli_error());
 $fetch_record = mysqli_fetch_array($sql_fectch_city);
 @extract($fetch_record);
 ?>

@@ -94,7 +94,7 @@ $reccnt = db_scalar($sql_count);
                                 ?>
                                 <tr class="<?= $css ?>">
                                     <?php $sql = "select * from tbl_cab where id='" . $line_raw['cab'] . "'";
-                                    $rs = mysqli_query($sql);
+                                    $rs = db_query($sql);
                                     $rss = mysqli_fetch_array($rs); ?>
                                     <td align="center" valign="top"><?= $cnt; ?><input type="hidden"
                                                                                        name="u_status_arr[]"

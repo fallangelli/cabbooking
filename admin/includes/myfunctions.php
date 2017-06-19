@@ -85,7 +85,7 @@ function siteMainData()
 
 function getdynamiccontent($pagename)
 {
-    $db1 = mysqli_query($kp = "select page_title,page_desc,page_keyword  from tbl_meta where  page_link = '" . $pagename . "' ");
+    $db1 = db_query($kp = "select page_title,page_desc,page_keyword  from tbl_meta where  page_link = '" . $pagename . "' ");
     #	echo $kp;
     $res2 = mysqli_fetch_array($db1);
     $res2 = ms_stripslashes($res2);

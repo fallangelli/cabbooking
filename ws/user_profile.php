@@ -24,10 +24,10 @@ if (isset($_POST['submit'])) {
 
             if ($user_type == 'passenger') {
 
-                $reg_ins = mysqli_query("UPDATE tbl_user set `fullname`='$full_name', `password`='$pass', `mobile`='$contact_no', `cab_type`='',`cab_no`='null' where email='$user_id' ");
+                $reg_ins = db_query("UPDATE tbl_user set `fullname`='$full_name', `password`='$pass', `mobile`='$contact_no', `cab_type`='',`cab_no`='null' where email='$user_id' ");
 
             } else {
-                $reg_ins = mysqli_query("UPDATE tbl_user set `fullname`='$full_name', `password`='$pass', `mobile`='$contact_no', `cab_type`='$cabtype',`cab_no`='$cabno' where email='$user_id' ");
+                $reg_ins = db_query("UPDATE tbl_user set `fullname`='$full_name', `password`='$pass', `mobile`='$contact_no', `cab_type`='$cabtype',`cab_no`='$cabno' where email='$user_id' ");
             }
             if ($reg_ins) {
 
@@ -82,7 +82,7 @@ if (isset($_POST['submit'])) {
 
 
             <div class="" style="padding-top: 20px;margin: 0 auto;width: 175px;">
-                <?php $sel_img = mysqli_query("select * from tbl_user where email='$user_id'");
+                <?php $sel_img = db_query("select * from tbl_user where email='$user_id'");
                 $fetch_img = mysqli_fetch_object($sel_img);
                 if ($fetch_img->image == "") { ?>
                     <img src="../images/user-icon.jpg" width="150" height="150">
@@ -108,7 +108,7 @@ if (isset($_POST['submit'])) {
                     <?php if ($user_type == 'driver') { ?>
                         <select class="text" style="width:100%;padding:10px !important" name="cab-type">
 
-                            <?php $sel_cab = mysqli_query("select * from tbl_category where cat_status = 'Active' order by cat_id");
+                            <?php $sel_cab = db_query("select * from tbl_category where cat_status = 'Active' order by cat_id");
                             while ($row = mysqli_fetch_array($sel_cab)) {
                                 ?>
                                 <option value="<?php echo $row['cat_id'] ?>" <?php if ($fetch_img->cab_type == $row['cat_id']) {

@@ -3,26 +3,26 @@ include('../includes/include_files.php');
 //include ('process_payment.php');
 $user_email = $_REQUEST['email'];
 $payment_id = $_REQUEST['payment_id'];
-$user_id = mysqli_fetch_object(mysqli_query("select * from tbl_user where email='$user_email'"));
+$user_id = mysqli_fetch_object(db_query("select * from tbl_user where email='$user_email'"));
 
 if (isset($_POST['coupon'])) {
 
     $coupon_code = $_REQUEST['coupon_code'];
 
-    $sel_coupon = mysqli_query("select * from tbl_coupon where coupon='$coupon_code' and status='1'");
+    $sel_coupon = db_query("select * from tbl_coupon where coupon='$coupon_code' and status='1'");
     $row_count = mysqli_num_rows($sel_coupon);
     if ($row_count > 0) {
         $sel_code = mysqli_fetch_array($sel_coupon);
         //$coupon_amount = $sel_code['flat_discount'];
 
-        $sel_coupon2 = mysqli_query("select * from tbl_user where email='$user_email'");
+        $sel_coupon2 = db_query("select * from tbl_user where email='$user_email'");
         $row = mysqli_fetch_array($sel_coupon2);
         if ($row['coupon_code'] == $sel_code['coupon']) {
 
             $msg = "Invalid Coupon Code!!";
         } else {
             $coupon_amount = $sel_code['flat_discount'];
-            $update_coupon = mysqli_query("update tbl_user set coupon_code = '$coupon_code' where email='$user_email'");
+            $update_coupon = db_query("update tbl_user set coupon_code = '$coupon_code' where email='$user_email'");
         }
     } else {
         $msg = "Invalid Coupon Code!!";
@@ -75,7 +75,7 @@ if (isset($_POST['coupon'])) {
             <div class="form">
                 <div>
                     <?php
-                    $sel_amount = mysqli_query("select * from tbl_payments where passenger_id='" . $user_id->id . "' and status='pending'");
+                    $sel_amount = db_query("select * from tbl_payments where passenger_id='" . $user_id->id . "' and status='pending'");
                     $row = mysqli_fetch_array($sel_amount);
                     $total_amount = $row['amount'];
                     ?>
@@ -114,7 +114,6 @@ if (isset($_POST['coupon'])) {
                 <script>
                     function payment() {
                         window.android.clickOnMakePayment("<?php echo $total_amount; ?>", "<?php echo $payment_id; ?>", "<?php echo "USD"; ?>");
-
                     }
                 </script>
 

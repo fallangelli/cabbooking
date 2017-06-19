@@ -1,7 +1,7 @@
 <?php
 include('../includes/include_files.php');
 $driver_email = $_REQUEST['email'];
-$driver_id = mysqli_fetch_object(mysqli_query("select * from tbl_user where email='$driver_email'"));
+$driver_id = mysqli_fetch_object(db_query("select * from tbl_user where email='$driver_email'"));
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +21,7 @@ $driver_id = mysqli_fetch_object(mysqli_query("select * from tbl_user where emai
         <div id="details">
             <?php
             $sel = "select * from tbl_payments where driver_id='$driver_id->id' and status='approved'";
-            $sel_exe = mysqli_query($sel);
+            $sel_exe = db_query($sel);
             $count = mysqli_num_rows($sel_exe);
             $amount = 0.00;
             while ($data = mysqli_fetch_array($sel_exe)) {

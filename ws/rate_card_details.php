@@ -1,9 +1,9 @@
 <?php
-include '../includes/database_connection.php';
+include '../includes/database.php';
 $cab_id = $_POST['cabid'];
 ?>
 <h2>Standard Rates</h2>
-<?php $sel_cab_detail = mysqli_query("select * from tbl_cab where category = '$cab_id'");
+<?php $sel_cab_detail = db_query("select * from tbl_cab where category = '$cab_id'");
 $detail = mysqli_fetch_object($sel_cab_detail); ?>
 
 <div class="rate-card">Fare Per Hour</div>

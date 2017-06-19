@@ -1,7 +1,7 @@
 <?php
 define("MAX_REFER", 20);
 //include ('../includes/constant.php');
-include('../includes/database_connection.php');
+include('../includes/database.php');
 $response = array();
 if ($_REQUEST['email'] && $_REQUEST['count'] && $_REQUEST['friends_ids']) {
 
@@ -13,7 +13,7 @@ if ($_REQUEST['email'] && $_REQUEST['count'] && $_REQUEST['friends_ids']) {
 
     //echo "<pre>";print_r($friends);exit;
 
-    $sel = mysqli_query("select * from refer_friend where email='$email'");
+    $sel = db_query("select * from refer_friend where email='$email'");
     $sel_data = mysqli_fetch_object($sel);
     $num_count = mysqli_num_rows($sel);
     if ($num_count > 0) {
@@ -23,15 +23,15 @@ if ($_REQUEST['email'] && $_REQUEST['count'] && $_REQUEST['friends_ids']) {
         $output_count = count(array_unique(array_merge($friends_ids2, $friends2)));
         $output = implode(",", $output);
         //echo "<pre>"; print_r($output);exit;
-        $update_refer = mysqli_query("update refer_friend set count='$output_count' , friend_ids='$output' where email='$email' and valid_flag='0' ");
+        $update_refer = db_query("update refer_friend set count='$output_count' , friend_ids='$output' where email='$email' and valid_flag='0' ");
         if ($update_refer) {
 
             if ($output_count >= 20) {
-                $update_flag = mysqli_query("update refer_friend set valid_flag ='1' where email='$email' ");
+                $update_flag = db_query("update refer_friend set valid_flag ='1' where email='$email' ");
                 $response['success'] = 2;
                 $response['couponcode'] = 1;
                 echo json_encode($response);
-                $sel_coupon = mysqli_fetch_object(mysqli_query("select * from tbl_coupon where status = 1 limit 1"));
+                $sel_coupon = mysqli_fetch_object(db_query("select * from tbl_coupon where status = 1 limit 1"));
                 $coupon = $sel_coupon->coupon;
 
                 $to = "$email";
@@ -65,13 +65,13 @@ if ($_REQUEST['email'] && $_REQUEST['count'] && $_REQUEST['friends_ids']) {
             echo json_encode($response);
         }
     } else {
-        $sel = mysqli_query("insert into refer_friend set count='$count' , friend_ids='$friends' , email='$email'");
+        $sel = db_query("insert into refer_friend set count='$count' , friend_ids='$friends' , email='$email'");
         if ($count >= 20) {
-            $update_flag = mysqli_query("update refer_friend set valid_flag ='1' where email='$email' ");
+            $update_flag = db_query("update refer_friend set valid_flag ='1' where email='$email' ");
             $response['success'] = 2;
             $response['couponcode'] = 1;
             echo json_encode($response);
-            $sel_coupon = mysqli_fetch_object(mysqli_query("select * from tbl_coupon where status = 1 limit 1"));
+            $sel_coupon = mysqli_fetch_object(db_query("select * from tbl_coupon where status = 1 limit 1"));
             $coupon = $sel_coupon->coupon;
 
             $to = "$email";

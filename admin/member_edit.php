@@ -38,7 +38,7 @@ if (isset($_REQUEST['update'])) {
 }
 if (isset($_REQUEST['set_flag']) && $_REQUEST['set_flag'] == 'update') {
     $member_id = $_REQUEST['member_id'];
-    $sql_fectch_city = mysqli_query("select  * from tbl_member  where member_id=$member_id") or die(mysqli_error());
+    $sql_fectch_city = db_query("select  * from tbl_member  where member_id=$member_id") or die(mysqli_error());
     $fetch_record = mysqli_fetch_array($sql_fectch_city);
     @extract($fetch_record);
 

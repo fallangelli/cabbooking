@@ -4,7 +4,7 @@ extract($_POST);
 if ($submitForm == "yes") {
     $expdate = $mm . "/" . $yyyy;
     $sql = "insert into tbl_user set fullname='$fullname', email='$email', password='$passwd', mobile='$mobile', name_on_card='$name_on_card', card_num='$card_num', exp_date='$expdate', cvv_num='$cvv_num', balance='0', paid_yet='0', add_date=curdate(), usertype='user', status='1'";
-    mysqli_query($sql);
+    db_query($sql);
 
     header("Location: register.php");
     die;

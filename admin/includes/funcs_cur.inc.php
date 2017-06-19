@@ -98,7 +98,7 @@ function fetchRecArr($table, $field1, $condition)
 {
     $row_arr = array();
     if ($table != "" && $field1 != "") {
-        $query_res = mysqli_query("select $field1 from $table where $condition");
+        $query_res = db_query("select $field1 from $table where $condition");
         if (mysqli_num_rows($query_res) == 1) {
             $row_arr = mysqli_fetch_array($query_res);
         }
@@ -369,7 +369,7 @@ function dateformat_txt($ap_date)
 function getCategoryName($cid)
 {
     $sql = "select cat_name from tbl_category where cat_id='" . $cid . "'";
-    $rs = mysqli_query($sql);
+    $rs = db_query($sql);
     $rc = mysqli_fetch_array($rs);
     return $rc['cat_name'];
 }

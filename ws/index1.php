@@ -1,16 +1,15 @@
 <?php
 include('../includes/include_files.php');
+$msg = '';
 if (isset($_POST['submit'])) {
 
-    $ucount = mysqli_query("select * from tbl_user where email='" . $_POST['uname'] . "' and password='" . $_POST['password'] . "' ");
+    $ucount = db_query("select * from tbl_user where email='" . $_POST['uname'] . "' and password='" . $_POST['password'] . "' ");
     $set = mysqli_fetch_object($ucount);
 
     if ($set == "") {
         $msg = "Your Login Details are In-correct. ";
-
     } else {
-
-        $uinfo = mysqli_query("select * from tbl_user where email='" . $_POST['uname'] . "' and password='" . $_POST['password'] . "' ");
+        $uinfo = db_query("select * from tbl_user where email='" . $_POST['uname'] . "' and password='" . $_POST['password'] . "' ");
         $res = mysqli_fetch_object($uinfo);
 
 
@@ -25,7 +24,6 @@ if (isset($_POST['submit'])) {
 
     }
 }
-
 
 ?>
 
@@ -64,7 +62,6 @@ if (isset($_POST['submit'])) {
 <script type=javascript>
     function android() {
         window.demo.clickOnAndroid();
-
     }
 </script>
 <!-- Page Contents Starts
@@ -83,7 +80,7 @@ if (isset($_POST['submit'])) {
     <!--   </div>-->
     <!-- header Ends -->
     <div data-role="content">
-        <div class="logo"><img src="images/cab-logo.png" width="300"></div>
+        <div class="logo"><img src="../images/cab-logo.png" width="300"></div>
         <!-- Form Starts -->
         <div class="form-element">
 
@@ -109,7 +106,7 @@ if (isset($_POST['submit'])) {
         <!-- Form Ends-->
 
         <!-- Footer Starts -->
-        <?php include 'includes/footer.php'; ?>
+        <?php include '../includes/footer.php'; ?>
         <!-- Footer Ends -->
     </div>
     <!-- /content -->

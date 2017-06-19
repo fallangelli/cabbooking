@@ -56,7 +56,7 @@ if (isset($_REQUEST['submit'])) {
             $thumb->save("product_images/$product_images_3", "100%");
         }
 
-        $sql_insert = mysqli_query("insert into tbl_product set
+        $sql_insert = db_query("insert into tbl_product set
 		product_code='$product_code',
 		product_name='$product_name',
 		product_desc='$product_desc',
@@ -153,7 +153,7 @@ if (isset($_REQUEST['update'])) {
             db_query("update tbl_product set product_image3='" . $product_images_3 . "' where product_id='" . $product_id . "'");
         }
 
-        $sql_update = mysqli_query("update tbl_product set
+        $sql_update = db_query("update tbl_product set
 		product_code='$product_code',
 		product_name='$product_name',
 		product_desc='$product_desc',
@@ -174,7 +174,7 @@ if (isset($_REQUEST['update'])) {
 }
 if (isset($_REQUEST['set_flag']) && $_REQUEST['set_flag'] == 'update') {
     $category_id = $_REQUEST['category_id'];
-    $sql_fectch_city = mysqli_query("select * from tbl_product  where product_id=$product_id") or die(mysqli_error());
+    $sql_fectch_city = db_query("select * from tbl_product  where product_id=$product_id") or die(mysqli_error());
     $fetch_record = mysqli_fetch_array($sql_fectch_city);
     @extract($fetch_record);
 }
@@ -217,7 +217,7 @@ if (isset($_REQUEST['set_flag']) && $_REQUEST['set_flag'] == 'update') {
                             <td class="tdLabel"><select name="cat_id" id="sproduct" style="width:200px; "/>
                                 <option value="">Select Catagory</option>
                                 <?php $sel = "SELECT * FROM `tbl_category`";
-                                $exe = mysqli_query($sel) or die("can't access");
+                                $exe = db_query($sel) or die("can't access");
                                 while ($data = mysqli_fetch_array($exe)) {
                                     ?>
                                     <option value="<?= $data['cat_id'] ?>" <?php if ($fetch_record['product_cat_id'] == $data['cat_id']) {

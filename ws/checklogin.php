@@ -1,12 +1,12 @@
 <?php
-include('../includes/database_connection.php');
+include('../includes/database.php');
 $response = array();
 $uname = mysqli_real_escape_string(addslashes($_REQUEST['username']));
 $pass = mysqli_real_escape_string(addslashes($_REQUEST['password']));
 
 if ($uname != "" && $pass != "") {
 
-    $ucount = mysqli_query("select * from tbl_user where email='$uname' and password='$pass' and status='Active' ");
+    $ucount = db_query("select * from tbl_user where email='$uname' and password='$pass' and status='Active' ");
     $count = mysqli_num_rows($ucount);
     $set = mysqli_fetch_object($ucount);
 
@@ -17,7 +17,7 @@ if ($uname != "" && $pass != "") {
         exit;
     } else {
 
-        $uinfo = mysqli_query("select * from tbl_user where email='$uname' and password='$pass'  and status='Active' ");
+        $uinfo = db_query("select * from tbl_user where email='$uname' and password='$pass'  and status='Active' ");
         $res = mysqli_fetch_object($uinfo);
         $user_type = $res->usertype;
         $response["success"] = 1;

@@ -17,7 +17,7 @@ if (isset($_REQUEST["email"]) && isset($_REQUEST["lat"]) && isset($_REQUEST["lon
 
     $db = new DB_Functions();
 
-    $del = mysqli_query("delete from nearest_driver where user_email='$email'");
+    $del = db_query("delete from nearest_driver where user_email='$email'");
 
     $res = $db->updatePos($email, $lat, $long, $cab_type);
     //echo $success;
@@ -25,7 +25,7 @@ if (isset($_REQUEST["email"]) && isset($_REQUEST["lat"]) && isset($_REQUEST["lon
     // send notification to each driver
 
     $driver_regID = array();
-    $sel_query = mysqli_query("SELECT * FROM gcm_users where driver_status='available' ");
+    $sel_query = db_query("SELECT * FROM gcm_users where driver_status='available' ");
     while ($row = mysqli_fetch_array($sel_query)) {
 
         $driver_regID[] = $row['gcm_regid'];
@@ -56,7 +56,7 @@ if (isset($_REQUEST["email"]) && isset($_REQUEST["lat"]) && isset($_REQUEST["lon
      echo round($miles,2);*/
 
     // calculate shortest distance between user and driver
-    mysqli_query("SELECT SLEEP(5)");
+    db_query("SELECT SLEEP(5)");
 
     $p_cab_type = $_REQUEST["cabtype"];
     if ($p_cab_type == 1) {
@@ -70,7 +70,7 @@ if (isset($_REQUEST["email"]) && isset($_REQUEST["lat"]) && isset($_REQUEST["lon
     $min_distance = "SELECT *, ( 3959 * acos( cos( radians($lat) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians($long) ) + sin( radians($lat) ) * sin( radians( latitude ) ) ) ) "
         . "AS distance FROM nearest_driver HAVING distance < 250 and user_email='$email' and driver_status = 'available' and cab_type ='$p_cab_type' ORDER BY distance LIMIT 1";
 
-    $min_distance_exe = mysqli_query($min_distance);
+    $min_distance_exe = db_query($min_distance);
     $row = mysqli_fetch_array($min_distance_exe);
     $driver_details = array();
     $id = $row['driver_email'];
@@ -80,7 +80,7 @@ if (isset($_REQUEST["email"]) && isset($_REQUEST["lat"]) && isset($_REQUEST["lon
 
     //echo "<br/>";
     $driver_info = "select * from tbl_user where email='$id'";
-    $driver_data = mysqli_fetch_object(mysqli_query($driver_info));
+    $driver_data = mysqli_fetch_object(db_query($driver_info));
     $driver_name = $driver_data->fullname;
     $driver_no = $driver_data->mobile;
     $driver_cab = $driver_data->cab_no;
