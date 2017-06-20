@@ -1,7 +1,7 @@
 <?php
 include('../includes/include_files.php');
 
-$user_email = mysqli_real_escape_string(addslashes($_REQUEST['email']));
+$user_email = real_escape_string(addslashes($_REQUEST['email']));
 $user_id = mysqli_fetch_object(db_query("select * from tbl_user where email='$user_email'"));
 ?>
 <!DOCTYPE html>

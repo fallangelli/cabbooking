@@ -11,9 +11,9 @@ include_once '../includes/db_functions.php';
 $db = new DB_Functions();
 if (isset($_REQUEST["email"]) && isset($_REQUEST["regId"]) && isset($_REQUEST["user_type"])) {
 
-    $user_type = mysqli_real_escape_string(addslashes($_REQUEST["user_type"]));
-    $email = mysqli_real_escape_string(addslashes($_REQUEST["email"]));
-    $gcm_regid = mysqli_real_escape_string(addslashes($_REQUEST["regId"])); // GCM Registration ID
+    $user_type = real_escape_string(addslashes($_REQUEST["user_type"]));
+    $email = real_escape_string(addslashes($_REQUEST["email"]));
+    $gcm_regid = real_escape_string(addslashes($_REQUEST["regId"])); // GCM Registration ID
     // Store user details in db
 
 

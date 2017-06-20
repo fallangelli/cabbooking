@@ -1,4 +1,5 @@
 <?php
+include_once "config.php";
 
 session_start();
 ob_start();
@@ -13,12 +14,13 @@ function admin_redirect()
 
 function connect_db()
 {
-    $GLOBALS['dbcon'] = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD);
-    if (!$GLOBALS['dbcon']) {
-        die('Could not Connect Database : ' . mysqli_error());
+    $link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD);
+    if (!$link)
+        echo "FAILD!连接错误";
+    else {
+        $GLOBALS['dbcon'] = $link;
+        mysqli_select_db($GLOBALS['dbcon'], DB_DATABASE) or die('Could not Select Database' . mysqli_error($link));
     }
-
-    mysqli_select_db($GLOBALS['dbcon'], DB_DATABASE) or die('Could not Select Database' . mysqli_error());
 }
 
 function db_query($query, $dbcon2 = null)

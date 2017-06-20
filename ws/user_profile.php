@@ -10,13 +10,13 @@ if (isset($_POST['submit'])) {
 
     //echo "<pre>";print_r($_REQUEST);exit;
 
-    $full_name = mysqli_real_escape_string(addslashes($_REQUEST['fname']));
-    //$email_address = mysqli_real_escape_string(addslashes($_REQUEST['email']));
-    $pass = mysqli_real_escape_string(addslashes($_REQUEST['password']));
-    $cpass = mysqli_real_escape_string(addslashes($_REQUEST['cpassword']));
-    $contact_no = mysqli_real_escape_string(addslashes($_REQUEST['mobile']));
-    $cabtype = mysqli_real_escape_string(addslashes($_REQUEST['cab-type']));
-    $cabno = mysqli_real_escape_string(addslashes($_REQUEST['cab_no']));
+    $full_name = real_escape_string(addslashes($_REQUEST['fname']));
+    //$email_address = real_escape_string(addslashes($_REQUEST['email']));
+    $pass = real_escape_string(addslashes($_REQUEST['password']));
+    $cpass = real_escape_string(addslashes($_REQUEST['cpassword']));
+    $contact_no = real_escape_string(addslashes($_REQUEST['mobile']));
+    $cabtype = real_escape_string(addslashes($_REQUEST['cab-type']));
+    $cabno = real_escape_string(addslashes($_REQUEST['cab_no']));
     //echo "<pre>";print_r($_REQUEST);exit;
     if ($full_name != "" && $pass != "" && $contact_no != "") {
 

@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['email'] = $res->email;
         $_SESSION['user_type'] = $res->usertype;
 
-        echo "<script> android();</script>";
+        echo "<script> window.demo.clickOnAndroid();</script>";
         //echo "<script>alert('hello');</script>";
 
     }
@@ -59,11 +59,7 @@ if (isset($_POST['submit'])) {
     <!--End form validation JS and CSS -->
 </head>
 <body>
-<script type=javascript>
-    function android() {
-        window.demo.clickOnAndroid();
-    }
-</script>
+
 <!-- Page Contents Starts
     ================================================== -->
 <div data-role="page" id="page" data-theme="d">

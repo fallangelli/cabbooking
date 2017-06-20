@@ -4,17 +4,17 @@ if (!defined('LOCAL_MODE')) {
 }
 
 if (LOCAL_MODE) {
-    $ARR_CFGS["db_host"] = 'localhost';
+    $ARR_CFGS["db_host"] = '127.0.0.1';
     $ARR_CFGS["db_name"] = 'cabbooking';
     $ARR_CFGS["db_user"] = 'root';
     $ARR_CFGS["db_pass"] = 'root';
-    define('SITE_SUB_PATH', '/cab/');
+    define('SITE_SUB_PATH', '/cabbooking/');
 } else {
-    $ARR_CFGS["db_host"] = 'localhost';
+    $ARR_CFGS["db_host"] = '127.0.0.1';
     $ARR_CFGS["db_name"] = 'cabbooking';
     $ARR_CFGS["db_user"] = 'root';
     $ARR_CFGS["db_pass"] = 'root';
-    define('SITE_SUB_PATH', '/PATH FROM ROOT/'); // please replace "PATH FROM ROOT" with your path from root here. If your application is in root, leave it as /
+    define('SITE_SUB_PATH', '/cabbooking/'); // please replace "PATH FROM ROOT" with your path from root here. If your application is in root, leave it as /
 }
 
 define('SITE_WS_PATH', 'http://' . $_SERVER['HTTP_HOST'] . SITE_SUB_PATH);

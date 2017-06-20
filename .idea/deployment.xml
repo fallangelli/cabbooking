@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="local-server" deleteMissingItems="true" createEmptyFolders="true" autoUploadExternalChanges="true">
+  <component name="PublishConfigData" autoUpload="Always" serverName="htyc.tech" deleteMissingItems="true" createEmptyFolders="true" autoUploadExternalChanges="true">
     <serverData>
+      <paths name="htyc.tech">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/cabbooking" local="$PROJECT_DIR$" web="/cabbooking" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/cabbooking/sql_log" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
       <paths name="local-server">
         <serverdata>
           <mappings>

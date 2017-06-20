@@ -1,8 +1,8 @@
 <?php
 include('../includes/database.php');
 $response = array();
-$uname = mysqli_real_escape_string(addslashes($_REQUEST['username']));
-$pass = mysqli_real_escape_string(addslashes($_REQUEST['password']));
+$uname = real_escape_string(addslashes($_REQUEST['username']));
+$pass = real_escape_string(addslashes($_REQUEST['password']));
 
 if ($uname != "" && $pass != "") {
 

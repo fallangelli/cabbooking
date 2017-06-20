@@ -3,7 +3,7 @@ include('../includes/include_files.php');
 if (isset($_POST['submit'])) {
 
 
-    $email_address = mysqli_real_escape_string(addslashes($_REQUEST['email']));
+    $email_address = real_escape_string(addslashes($_REQUEST['email']));
 
     if ($email_address != "") {
 
